@@ -1,0 +1,28 @@
+/* Puedes agregar aquí tus estilos personalizados para sobreescribir los de Bootstrap */
+
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  /* Personaliza el estilo del botón de registro */
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #fff;
+}
+
+.router-link:hover {
+  color: #0025f7; /* Color del texto al pasar el mouse */
+}
+
+.router-link {
+  color: #343a40; /* Color del texto por defecto */
+}
