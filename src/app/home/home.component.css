@@ -1,0 +1,22 @@
+.home-container {
+	padding: 20px;
+	text-align: center;
+  }
+  
+  h1 {
+	font-size: 2em;
+	margin-bottom: 20px;
+  }
+  
+  a {
+	display: inline-block;
+	margin: 10px;
+	font-size: 1.1em;
+	color: #007bff;
+	text-decoration: none;
+  }
+  
+  a:hover {
+	text-decoration: underline;
+  }
+  

@@ -7,13 +7,12 @@ import {
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { Asistente } from '../asistentes/asistente.model';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
 })
@@ -44,9 +43,9 @@ export class RegistroComponent implements OnInit {
             this.errorMessage = '';
           },
           (error) => {
-            console.error(error);
+            console.error(error.message);
             // Manejar los errores (por ejemplo, mostrar un mensaje de error al usuario)
-            this.errorMessage = error.error.error;
+            //this.errorMessage = error;
           }
         );
     } else {

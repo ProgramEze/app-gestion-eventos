@@ -1,1 +1,18 @@
-<p>home works!</p>
+<div class="home-container">
+	<h1>Bienvenido a la Gestión de Eventos</h1>
+  
+	<div *ngIf="loggedIn; else notLoggedIn">
+	  <p>¡Hola! Estás logueado.</p>
+	  <p>Accede a tus eventos, perfil y más.</p>
+	  
+	  <button class="btn btn-primary" (click)="navigateToPerfil()">Ir a Mi Perfil</button> &nbsp;&nbsp;&nbsp;
+	  <button class="btn btn-secondary" (click)="navigateToAsistentes()">Ver Asistentes</button>
+	</div>
+  
+	<ng-template #notLoggedIn>
+	  <p>Para acceder a todas las funciones, por favor, inicia sesión.</p>
+	  <button class="btn btn-primary" (click)="navigateToLogin()">Iniciar Sesión</button> &nbsp;&nbsp;&nbsp;
+	  <button class="btn btn-secondary" (click)="navigateToRegistrar()">Registrarse</button>
+	</ng-template>
+  </div>
+  

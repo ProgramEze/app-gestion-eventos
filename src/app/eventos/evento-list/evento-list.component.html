@@ -1,0 +1,49 @@
+<div class="evento-list-container">
+	<h1 class="title">Lista de Eventos</h1>
+
+	<!-- Solo los organizadores pueden crear eventos -->
+	<button
+		*ngIf="isOrganizador"
+		(click)="abrirFormulario()"
+		class="btn btn-primary"
+	>
+		Crear Evento
+	</button>
+
+	<table class="custom-table">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Fecha</th>
+				<th>Ubicación</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let evento of eventos">
+				<td>{{ evento.nombre }}</td>
+				<td>{{ evento.descripcion }}</td>
+				<td>{{ evento.fecha | date : "shortDate" }}</td>
+				<td>{{ evento.ubicacion }}</td>
+				<td>
+					<!-- Botones solo visibles para el organizador -->
+					<button
+						*ngIf="isOrganizador"
+						(click)="abrirFormulario(evento)"
+						class="btn btn-warning"
+					>
+						Editar
+					</button>
+					<button
+						*ngIf="isOrganizador"
+						(click)="eliminarEvento(evento.idEvento)"
+						class="btn btn-danger"
+					>
+						Eliminar
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

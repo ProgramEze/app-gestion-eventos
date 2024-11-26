@@ -3,20 +3,59 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegistroComponent } from './registro/registro.component';
-import { AuthGuard } from './login.guard';
 import { AsistenteListComponent } from './asistentes/asistente-list/asistente-list.component';
+import { LoginGuard } from './login.guard';
+import { AsistenteDetailComponent } from './asistentes/asistente-detail/asistente-detail.component';
+import { AsistenteEditComponent } from './asistentes/asistente-edit/asistente-edit.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { EventoListComponent } from './eventos/evento-list/evento-list.component';
+import { EventoCreateComponent } from './eventos/evento-create/evento-create.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LoginComponent},
-  { path: 'registrar', component: RegistroComponent},
-  { path: 'home', component: HomeComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'lista-de-asistentes', component: AsistenteListComponent}
+	{ path: 'login', component: LoginComponent },
+	{ path: '', component: HomeComponent },
+	{ path: 'registrar', component: RegistroComponent },
+	{
+		path: 'perfil',
+		component: PerfilComponent,
+		canActivate: [LoginGuard],
+		data: { roles: ['Organizador', 'Asistente'] },
+	},
+	{
+		path: 'asistentes',
+		component: AsistenteListComponent,
+		canActivate: [LoginGuard],
+		data: { roles: ['Organizador'] },
+	},
+	{
+		path: 'asistentes/:id',
+		component: AsistenteDetailComponent,
+		canActivate: [LoginGuard],
+		data: { roles: ['Organizador', 'Asistente'] },
+	},
+	{
+		path: 'asistentes/edit/:id',
+		component: AsistenteEditComponent,
+		canActivate: [LoginGuard],
+		data: { roles: ['Organizador', 'Asistente'] },
+	},
+	{
+		path: 'eventos',
+		component: EventoListComponent,
+		canActivate: [LoginGuard],
+		data: { roles: ['Organizador', 'Asistente'] },
+	},
+	{
+		path: 'eventos/create',
+        component: EventoCreateComponent, // Añadí esto para el detalle del evento
+        canActivate: [LoginGuard],
+        data: { roles: ['Organizador'] },
+	},
+	{ path: '**', redirectTo: '/', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)], // Cambié esto a forChild
+	exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
