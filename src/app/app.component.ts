@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 		this.loginService.checkSession();
 		this.loginService.loggedIn$.subscribe((status) => {
 			this.loggedIn = status;
-			this.username = this.loginService.getNombre();
+			this.username = this.loginService.getNombre() || 'Invitado';
 			this.esOrganizador = this.loginService.isRoleIn() === 'Organizador';
 		});
 	}

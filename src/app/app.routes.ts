@@ -10,9 +10,13 @@ import { AsistenteEditComponent } from './asistentes/asistente-edit/asistente-ed
 import { PerfilComponent } from './perfil/perfil.component';
 import { EventoListComponent } from './eventos/evento-list/evento-list.component';
 import { EventoCreateComponent } from './eventos/evento-create/evento-create.component';
+import { EventoEditComponent } from './eventos/evento-edit/evento-edit.component';
 
 export const routes: Routes = [
-	{ path: 'login', component: LoginComponent },
+	{
+		path: 'login',
+		component: LoginComponent
+	},
 	{ path: '', component: HomeComponent },
 	{ path: 'registrar', component: RegistroComponent },
 	{
@@ -23,9 +27,7 @@ export const routes: Routes = [
 	},
 	{
 		path: 'asistentes',
-		component: AsistenteListComponent,
-		canActivate: [LoginGuard],
-		data: { roles: ['Organizador'] },
+		component: AsistenteListComponent
 	},
 	{
 		path: 'asistentes/:id',
@@ -47,11 +49,17 @@ export const routes: Routes = [
 	},
 	{
 		path: 'eventos/create',
-        component: EventoCreateComponent, // Añadí esto para el detalle del evento
-        canActivate: [LoginGuard],
+		component: EventoCreateComponent, // Añadí esto para el detalle del evento
+		canActivate: [LoginGuard],
+		data: { roles: ['Organizador'] },
+	},
+	{
+		path: 'eventos/edit/:id',
+		component: EventoEditComponent,
+		canActivate: [LoginGuard],
         data: { roles: ['Organizador'] },
 	},
-	{ path: '**', redirectTo: '/', pathMatch: 'full' },
+	{ path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({

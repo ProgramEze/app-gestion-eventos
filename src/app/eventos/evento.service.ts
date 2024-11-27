@@ -34,7 +34,9 @@ export class EventoService {
 	}
 
 	// Actualiza un evento existente
-	actualizarEvento(idEvento: number, evento: Evento): Observable<Evento> {
+	actualizarEvento(idEvento: string, evento: Evento): Observable<Evento> {
+		console.log(idEvento);
+		console.log(evento);
 		return this.http.put<Evento>(`${this.baseUrl}/${idEvento}`, evento, {
 			withCredentials: true,
 		});

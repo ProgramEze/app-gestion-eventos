@@ -6,7 +6,7 @@
 	  <p>Accede a tus eventos, perfil y más.</p>
 	  
 	  <button class="btn btn-primary" (click)="navigateToPerfil()">Ir a Mi Perfil</button> &nbsp;&nbsp;&nbsp;
-	  <button class="btn btn-secondary" (click)="navigateToAsistentes()">Ver Asistentes</button>
+	  <button *ngIf="isOrganizador" class="btn btn-secondary" (click)="navigateToAsistentes()">Ver Asistentes</button>
 	</div>
   
 	<ng-template #notLoggedIn>

@@ -26,14 +26,17 @@ export class LoginService {
 				tap((response) => {
 					console.log(response.user !== undefined);
 					if (response.user !== undefined) {
-						console.log(sessionStorage);
 						// Guardar el estado en sessionStorage
-						const {idAsistente, nombre, email, rol } = response.user;
+						const { idAsistente, nombre, email, rol } =
+							response.user;
 						sessionStorage.setItem('loggedIn', 'true');
-						sessionStorage.setItem('idAsistente', idAsistente.toString());
+						sessionStorage.setItem(
+							'idAsistente',
+							idAsistente.toString()
+						);
 						sessionStorage.setItem('nombre', nombre);
 						sessionStorage.setItem('email', email);
-						sessionStorage.setItem('userRole', rol); 
+						sessionStorage.setItem('userRole', rol);
 						console.log(sessionStorage.getItem('userRole'));
 						this.loggedInSubject.next(true);
 					}
@@ -67,8 +70,16 @@ export class LoginService {
 		);
 	}
 
-	getNombre(): string {
-		return sessionStorage.getItem('nombre') || '';
+	getNombre(): string | null {
+		if (
+			typeof window !== 'undefined' &&
+			typeof sessionStorage !== 'undefined'
+		) {
+			return sessionStorage.getItem('nombreUsuario');
+		} else {
+			console.warn('sessionStorage no está disponible.');
+			return null;
+		}
 	}
 
 	isRoleIn(): string {
@@ -85,9 +96,12 @@ export class LoginService {
 	// Verificar si sessionStorage está disponible
 	private isSessionStorageAvailable(): boolean {
 		try {
-			sessionStorage.setItem('test', 'test');
-			sessionStorage.removeItem('test');
-			return true;
+			if (typeof window !== 'undefined' && window.sessionStorage) {
+				sessionStorage.setItem('test', 'test');
+				sessionStorage.removeItem('test');
+				return true;
+			}
+			return false;
 		} catch {
 			return false;
 		}

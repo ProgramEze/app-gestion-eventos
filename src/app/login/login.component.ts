@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './login.service';
 import { Router, RouterLink } from '@angular/router';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
 	errorMessage: string = '';
 
@@ -24,6 +24,12 @@ export class LoginComponent {
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', Validators.required],
 		});
+	}
+
+	ngOnInit(): void {
+		if(this.loginService.isLoggedIn()){
+			this.router.navigate(['/']);
+		}
 	}
 
 	onSubmit() {
@@ -45,7 +51,7 @@ export class LoginComponent {
 						this.router.navigate(['/asistentes']);
 					} else if(response.user.rol === 'Asistente'){
 						console.log(response.user.rol);
-						this.router.navigate(['/']);
+						this.router.navigate(['/eventos']);
 					}
 				},
 				(error) => {

@@ -8,6 +8,7 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-registro',
@@ -20,9 +21,12 @@ export class RegistroComponent implements OnInit {
   registroForm!: FormGroup;
   errorMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
+	if(this.loginService.isLoggedIn()){
+		this.router.navigate(['/']);
+	}
     this.registroForm = new FormGroup({
       nombre: new FormControl('', Validators.required),
       domicilio: new FormControl('', Validators.required),
